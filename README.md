@@ -1,7 +1,7 @@
 # SoapBuisness
 The repo for 307 Website that will then act as a buisness 
 
-🤝 Contributing
+Contributing
 To maintain consistent code style, we use Prettier and ESLint.
 
 Setup Instructions
