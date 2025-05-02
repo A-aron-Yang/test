@@ -1,10 +1,10 @@
 # SoapBuisness
-The repo for 307 Website that will then act as a buisness 
+The repo for 307 Website that will then act as a business 
 
 Contributing
 To maintain consistent code style, we use Prettier and ESLint.
 
-VSCode has an extnetion for Prettier, so setup for it is simple.
+VSCode has an extention for Prettier, so setup for it is simple.
 
 Setup Instructions
 Run npm install in both /client and /server folders.
