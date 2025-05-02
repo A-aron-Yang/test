@@ -1,14 +1,13 @@
 # SoapBuisness
 The monorepo for 307 Website that will then act as a business 
 
-Contributing
+Contributing:
 To maintain consistent code style, we use Prettier and ESLint.
 
-Setup Instructions
+Setup Instructions:
 Run npm install in both /client and /server folders.
 
 Format your code with:
-
 npm run format
 you can Use VSCode with the Prettier and ESLint extensions installed.
 
