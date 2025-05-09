@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Subscribe() {
+export default function SubscribeButton() {
   return (
     <section className="py-12 bg-green-50 px-6">
       <div className="max-w-3xl mx-auto text-center">
