@@ -1,15 +1,17 @@
-// frontend/src/App.jsx
-import Sidebar from "./components/MainMenuSideBar"
-function App() {
+import NavBar from './components/Navbar'
+import Hero from './components/Hero'
+import FeaturedProducts from './components/FeaturedProducts'
+import Footer from './components/MainFooter'
+import Subscribe from './components/SubscribeButton'
+
+export default function App() {
   return (
-    <div>
-      <Sidebar />
-      <main style={{ marginLeft: 0, padding: '2rem' }}>
-        <h1>Your Main Content</h1>
-        <p>Click the hamburger icon to open the menu.</p>
-      </main>
+    <div className="flex flex-col min-h-screen">
+      <NavBar />
+      <Hero />
+      <FeaturedProducts />
+      <Subscribe />
+      <Footer />
     </div>
   )
 }
-
-export default App
