@@ -1,13 +1,14 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Navbar           from './components/Navbar'
-import Hero             from './components/Hero'
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
 import FeaturedProducts from './components/FeaturedProducts'
-import SubscribeButton  from './components/SubscribeButton'
-import MainFooter       from './components/MainFooter'
-import Login            from './pages/Login'
-import Verify           from './pages/Verify'
+import SubscribeButton from './components/SubscribeButton'
+import MainFooter from './components/MainFooter'
+import Login from './pages/Login'
+import Verify from './pages/Verify'
 import CreateAccount from './pages/CreateAccount'
+import Cart from './pages/Cart'
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/verify" element={<Verify />} />
         <Route path="/create-account" element={<CreateAccount />} />
+        <Route path="/cart" element={<Cart />} />
       </Routes>
     </div>
   )

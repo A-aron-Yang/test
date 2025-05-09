@@ -13,7 +13,7 @@ export default function Hero() {
         </p>
         <div className="mt-8 flex flex-wrap gap-4">
           <a
-            href="/catalog"
+            href="/shop"
             className="px-6 py-3 bg-green-600 text-white rounded-md shadow hover:bg-green-700"
           >
             Shop Now
