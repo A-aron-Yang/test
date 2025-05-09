@@ -9,6 +9,8 @@ import Login from './pages/Login'
 import Verify from './pages/Verify'
 import CreateAccount from './pages/CreateAccount'
 import Cart from './pages/Cart'
+import Checkout from './pages/Checkout'
+import Confirmation from './pages/Confirmation'
 
 export default function App() {
   return (
@@ -31,6 +33,8 @@ export default function App() {
         <Route path="/verify" element={<Verify />} />
         <Route path="/create-account" element={<CreateAccount />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/confirmation" element={<Confirmation />} />
       </Routes>
     </div>
   )

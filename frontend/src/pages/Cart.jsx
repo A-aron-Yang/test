@@ -1,10 +1,9 @@
-// src/pages/Cart.jsx
 import React from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Cart() {
   // TODO: replace with real cart state
-  const cartItems = [{ id: 1, name: 'Lavender Bliss', price: 8.99, quantity: 2 }]
+  const cartItems = [{ id: 1, name: 'Lavender Bliss', price: 8.99, quantity: 3 }]
 
   const subtotal = cartItems
     .reduce((sum, item) => sum + item.price * item.quantity, 0)
@@ -77,9 +76,9 @@ export default function Cart() {
               >
                 Continue Shopping
               </Link>
-              <button className="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+              <Link to="/checkout"  className="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700">
                 Proceed to Checkout
-              </button>
+              </Link>
             </div>
           </div>
         </>

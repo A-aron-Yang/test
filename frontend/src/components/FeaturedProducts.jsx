@@ -1,4 +1,3 @@
-// src/components/FeaturedProducts.jsx
 import React from 'react'
 
 export default function FeaturedProducts() {
