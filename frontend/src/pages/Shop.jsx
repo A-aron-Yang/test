@@ -1,14 +1,14 @@
 import React, { useState, useMemo } from 'react'
 import { Link } from 'react-router-dom'
+import { useCartDispatch } from '../context/CartContext'
 
-// Sample product data
 const products = [
-  { id: 1, name: 'Lavender Bliss',   price: 8.99, category: 'Relaxing'   },
-  { id: 2, name: 'Rose Petal Magic', price: 9.49, category: 'Romantic'   },
-  { id: 3, name: 'Citrus Sunrise',   price: 7.99, category: 'Energizing' },
-  { id: 4, name: 'Minty Fresh',      price: 8.49, category: 'Refreshing' },
-  { id: 5, name: 'Oatmeal Comfort',  price: 7.49, category: 'Sensitive'  },
-  { id: 6, name: 'Charcoal Detox',   price: 9.99, category: 'Purifying'  },
+  { id: '1', name: 'Lavender Bliss',   price: 8.99, category: 'Relaxing'   },
+  { id: '2', name: 'Rose Petal Magic', price: 9.49, category: 'Romantic'   },
+  { id: '3', name: 'Citrus Sunrise',   price: 7.99, category: 'Energizing' },
+  { id: '4', name: 'Minty Fresh',      price: 8.49, category: 'Refreshing' },
+  { id: '5', name: 'Oatmeal Comfort',  price: 7.49, category: 'Sensitive'  },
+  { id: '6', name: 'Charcoal Detox',   price: 9.99, category: 'Purifying'  },
 ]
 
 const categories = ['All','Relaxing','Romantic','Energizing','Refreshing','Sensitive','Purifying']
@@ -23,10 +23,10 @@ export default function Shop() {
   const [search, setSearch]     = useState('')
   const [category, setCategory] = useState('All')
   const [sortBy, setSortBy]     = useState('name_asc')
+  const dispatch = useCartDispatch()
 
   const filtered = useMemo(() => {
     let list = products
-
     if (search) {
       const q = search.toLowerCase()
       list = list.filter(p => p.name.toLowerCase().includes(q))
@@ -45,6 +45,9 @@ export default function Shop() {
     })
   }, [search, category, sortBy])
 
+  const addToCart = item =>
+    dispatch({ type: 'ADD_ITEM', payload: { ...item, quantity: 1 } })
+
   return (
     <section className="w-screen bg-white px-4 lg:px-8 py-12">
       <h1 className="text-3xl font-extrabold text-gray-900 mb-6">
@@ -53,29 +56,23 @@ export default function Shop() {
 
       <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 mb-8">
         <input
-          type="text"
-          placeholder="Search products..."
-          value={search}
-          onChange={e => setSearch(e.target.value)}
+          type="text" placeholder="Search products..."
+          value={search} onChange={e => setSearch(e.target.value)}
           className="w-full sm:w-1/3 px-3 py-2 mb-4 sm:mb-0 bg-gray-200 focus:bg-gray-300 text-black border border-gray-300 rounded"
         />
         <select
-          value={category}
-          onChange={e => setCategory(e.target.value)}
+          value={category} onChange={e => setCategory(e.target.value)}
           className="w-full sm:w-1/4 px-3 py-2 mb-4 sm:mb-0 bg-gray-200 focus:bg-gray-300 text-black border border-gray-300 rounded"
         >
-          {categories.map(cat => (
-            <option key={cat} value={cat}>{cat}</option>
-          ))}
+          {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
         </select>
         <select
-          value={sortBy}
-          onChange={e => setSortBy(e.target.value)}
+          value={sortBy} onChange={e => setSortBy(e.target.value)}
           className="w-full sm:w-1/4 px-3 py-2 bg-gray-200 focus:bg-gray-300 text-black border border-gray-300 rounded"
         >
-          {sortOptions.map(opt => (
+          {sortOptions.map(opt =>
             <option key={opt.value} value={opt.value}>{opt.label}</option>
-          ))}
+          )}
         </select>
       </div>
 
@@ -91,7 +88,10 @@ export default function Shop() {
               <h2 className="font-semibold text-gray-900 mb-2">{p.name}</h2>
             </Link>
             <p className="text-gray-700 mb-4">${p.price.toFixed(2)}</p>
-            <button className="mt-auto px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+            <button
+              onClick={() => addToCart(p)}
+              className="mt-auto px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+            >
               Add to Cart
             </button>
           </div>

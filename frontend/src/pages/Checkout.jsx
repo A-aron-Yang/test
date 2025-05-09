@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useCart, useCartDispatch } from '../context/CartContext'
 
 export default function Checkout() {
-  // TODO: replace with real cart state
-  const sampleCart = [
-    { id: 1, name: 'Lavender Bliss', price: 8.99, quantity: 3 }
-  ]
-  const subtotal = sampleCart
+  const cartItems = useCart()
+  const dispatch = useCartDispatch()
+  const subtotal = cartItems
     .reduce((sum, item) => sum + item.price * item.quantity, 0)
     .toFixed(2)
 
+  // form state
   const [firstName, setFirstName]   = useState('')
   const [lastName, setLastName]     = useState('')
   const [address, setAddress]       = useState('')
@@ -23,20 +23,26 @@ export default function Checkout() {
 
   const handleSubmit = e => {
     e.preventDefault()
-    // TODO: submit order
-    navigate('/confirmation', { state: { order: sampleCart, email: `${firstName} ${lastName}` } })
+    // TODO: send order to backend
+    // clear cart
+    dispatch({ type: 'CLEAR_CART' })
+    navigate('/confirmation', {
+      state: {
+        order: cartItems,
+        email: `${firstName} ${lastName}`,
+      },
+    })
   }
 
   return (
     <section
-      className="w-screen bg-white flex flex-col lg:flex-row px-4 lg:px-8 py-12"
-      style={{ minHeight: '100vh' }}
+      className="w-screen bg-white flex flex-col lg:flex-row px-4 lg:px-8 py-12 min-h-screen items-start"
     >
       {/* Order Summary - desktop only */}
       <aside className="hidden lg:block w-1/3 bg-gray-50 p-6 rounded shadow ml-8">
         <h3 className="text-xl font-semibold mb-4">Order Summary</h3>
         <ul className="space-y-4">
-          {sampleCart.map(item => (
+          {cartItems.map(item => (
             <li key={item.id} className="flex justify-between">
               <div>
                 <p className="font-medium text-gray-900">{item.name}</p>

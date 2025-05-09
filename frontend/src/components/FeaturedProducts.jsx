@@ -1,12 +1,21 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { useCartDispatch } from '../context/CartContext'
 
 export default function FeaturedProducts() {
+  const dispatch = useCartDispatch()
+
   const featured = [1,2,3,4,5,6,7,8].map(n => ({
-    id: n,
+    id: n.toString(),
     name: `Soap ${n}`,
-    price: (7 + n * 0.5).toFixed(2),
+    price: 7 + n * 0.5,
   }))
+
+  const addToCart = item =>
+    dispatch({
+      type: 'ADD_ITEM',
+      payload: { ...item, quantity: 1 },
+    })
 
   return (
     <section id="featured" className="w-full bg-white py-12">
@@ -22,12 +31,13 @@ export default function FeaturedProducts() {
               </div>
             </Link>
             <Link to={`/product/${item.id}`} className="hover:underline">
-              <h3 className="font-semibold mb-2 text-gray-900">
-                {item.name}
-              </h3>
+              <h3 className="font-semibold mb-2 text-gray-900">{item.name}</h3>
             </Link>
-            <p className="text-gray-700 mb-4 flex-1">${item.price}</p>
-            <button className="mt-auto px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+            <p className="text-gray-700 mb-4">${item.price.toFixed(2)}</p>
+            <button
+              onClick={() => addToCart(item)}
+              className="mt-auto px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+            >
               Add to Cart
             </button>
           </div>
