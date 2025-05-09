@@ -23,7 +23,7 @@ export default function Cart() {
         <p className="text-gray-600">
           Your cart is empty{' '}
           <Link
-            to="/home"
+            to="/shop"
             className="inline-block px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 focus:outline-none focus:ring-0"
           >
             Continue Shopping
@@ -74,7 +74,7 @@ export default function Cart() {
             </div>
             <div className="mt-4 sm:mt-0 flex space-x-4">
               <Link
-                to="/home"
+                to="/shop"
                 onClick={() => window.scrollTo(0, 0)}
                 className="px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700 focus:outline-none focus:ring-0"
               >
