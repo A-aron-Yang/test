@@ -1,15 +1,45 @@
-// frontend/src/App.jsx
-import Sidebar from "./components/MainMenuSideBar"
-function App() {
+import React from 'react'
+import { Routes, Route } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
+import FeaturedProducts from './components/FeaturedProducts'
+import SubscribeButton from './components/SubscribeButton'
+import MainFooter from './components/MainFooter'
+import Login from './pages/Login'
+import Verify from './pages/Verify'
+import CreateAccount from './pages/CreateAccount'
+import Cart from './pages/Cart'
+import Checkout from './pages/Checkout'
+import Confirmation from './pages/Confirmation'
+import Shop from './pages/Shop'
+import Product from './pages/Product'
+
+export default function App() {
   return (
-    <div>
-      <Sidebar />
-      <main style={{ marginLeft: 0, padding: '2rem' }}>
-        <h1>Your Main Content</h1>
-        <p>Click the hamburger icon to open the menu.</p>
-      </main>
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+
+      <Routes>
+        <Route
+          path="/home"
+          element={
+            <>
+              <Hero />
+              <FeaturedProducts />
+              <SubscribeButton />
+              <MainFooter />
+            </>
+          }
+        />
+        <Route path="/login" element={<Login />} />
+        <Route path="/verify" element={<Verify />} />
+        <Route path="/create-account" element={<CreateAccount />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/confirmation" element={<Confirmation />} />
+        <Route path="/shop" element={<Shop />} />
+        <Route path="/product/:id" element={<Product />} />
+      </Routes>
     </div>
   )
 }
-
-export default App
