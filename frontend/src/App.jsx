@@ -1,5 +1,5 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import FeaturedProducts from './components/FeaturedProducts'
@@ -20,6 +20,7 @@ export default function App() {
       <Navbar />
 
       <Routes>
+        <Route path="/" element={<Navigate to="/shop" replace />} />
         <Route
           path="/home"
           element={
