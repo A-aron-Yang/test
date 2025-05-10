@@ -1,6 +1,25 @@
 import React from 'react'
+import { useLocation } from 'react-router-dom'
 
 export default function Hero() {
+  const loc = useLocation()
+
+  const scrollToFeatured = e => {
+    e.preventDefault()
+    if (loc.pathname !== '/home') {
+      window.location.hash = '#/home'
+      setTimeout(() => {
+        document
+          .getElementById('featured')
+          ?.scrollIntoView({ behavior: 'smooth' })
+      }, 50)
+    } else {
+      document
+        .getElementById('featured')
+        ?.scrollIntoView({ behavior: 'smooth' })
+    }
+  }
+
   return (
     <section className="w-screen bg-white px-4 lg:px-8 py-12">
       <div className="w-full">
@@ -20,6 +39,7 @@ export default function Hero() {
           </a>
           <a
             href="#featured"
+            onClick={scrollToFeatured}
             className="px-6 py-3 bg-green-100 text-green-700 rounded-md hover:bg-green-200"
           >
             View Featured
