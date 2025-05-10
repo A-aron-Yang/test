@@ -13,6 +13,7 @@ import Checkout from './pages/Checkout'
 import Confirmation from './pages/Confirmation'
 import Shop from './pages/Shop'
 import Product from './pages/Product'
+import Admin from './pages/Admin'
 
 export default function App() {
   return (
@@ -40,6 +41,7 @@ export default function App() {
         <Route path="/confirmation" element={<Confirmation />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/product/:id" element={<Product />} />
+        <Route path="/admin" element={<Admin />} />
       </Routes>
     </div>
   )
