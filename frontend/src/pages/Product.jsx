@@ -87,19 +87,45 @@ export default function Product() {
               />
             </div>
 
-            <button
-              onClick={handleAdd}
-              className="w-full lg:w-auto px-8 py-3 bg-black text-white rounded hover:bg-gray-800 transition-colors"
-            >
-              Add to Cart
-            </button>
+            <div className="flex flex-col space-y-4">
+              <button
+                onClick={handleAdd}
+                className="w-full lg:w-auto px-8 py-3 bg-black text-white rounded hover:bg-gray-800 transition-colors"
+              >
+                Add to Cart
+              </button>
 
-            <Link 
-              to="/shop" 
-              className="mt-6 text-sm text-black hover:underline inline-block"
-            >
-              ← Back to Shop
-            </Link>
+              <button
+                onClick={() => {
+                  fetch(`http://localhost:5000/api/wishlist/1/add`, {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ productId: parseInt(id) })
+                  })
+                    .then(res => res.json())
+                    .catch(error => console.error('Error adding to wishlist:', error))
+                }}
+                className="w-full lg:w-auto px-8 py-3 bg-white text-black border border-black rounded hover:bg-gray-100 transition-colors"
+              >
+                Add to Wishlist
+              </button>
+
+              <Link 
+                to={`/reviews/${id}`}
+                className="w-full lg:w-auto px-8 py-3 text-center bg-gray-100 text-black rounded hover:bg-gray-200 transition-colors"
+              >
+                View Reviews
+              </Link>
+
+              <Link 
+                to="/shop" 
+                className="text-sm text-black hover:underline inline-block"
+              >
+                ← Back to Shop
+              </Link>
+            </div>
           </div>
         </div>
       </div>
