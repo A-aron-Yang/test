@@ -26,6 +26,9 @@ export default function Navbar() {
             </span>
             )}
           </Link>
+          <Link to="/wishlist" className="text-gray-700 hover:text-green-600">
+            Wishlist
+          </Link>
           <Link to="/login" className="text-gray-700 hover:text-green-600">
             <i className="fas fa-user"></i> Login
           </Link>

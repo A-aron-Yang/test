@@ -7,6 +7,7 @@ export default function Product() {
   const { id } = useParams()
   const [product, setProduct] = useState(null)
   const [quantity, setQuantity] = useState(1)
+  const [showNotification, setShowNotification] = useState(false)
   const dispatch = useCartDispatch()
 
   useEffect(() => {
@@ -31,6 +32,22 @@ export default function Product() {
       type: 'ADD_ITEM',
       payload: { ...product, quantity },
     })
+
+  const handleAddToWishlist = () => {
+    fetch(`http://localhost:5000/api/wishlist/1/add`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ productId: parseInt(id) })
+    })
+      .then(res => res.json())
+      .then(() => {
+        setShowNotification(true)
+        setTimeout(() => setShowNotification(false), 3000)
+      })
+      .catch(error => console.error('Error adding to wishlist:', error))
+  }
 
   return (
     <section className="w-screen bg-white px-4 lg:px-8 py-12">
@@ -96,17 +113,7 @@ export default function Product() {
               </button>
 
               <button
-                onClick={() => {
-                  fetch(`http://localhost:5000/api/wishlist/1/add`, {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ productId: parseInt(id) })
-                  })
-                    .then(res => res.json())
-                    .catch(error => console.error('Error adding to wishlist:', error))
-                }}
+                onClick={handleAddToWishlist}
                 className="w-full lg:w-auto px-8 py-3 bg-white text-black border border-black rounded hover:bg-gray-100 transition-colors"
               >
                 Add to Wishlist
@@ -126,6 +133,12 @@ export default function Product() {
                 ← Back to Shop
               </Link>
             </div>
+
+            {showNotification && (
+              <div className="fixed bottom-4 right-4 bg-green-600 text-white px-4 py-2 rounded shadow-lg transition-opacity duration-300">
+                Added to wishlist!
+              </div>
+            )}
           </div>
         </div>
       </div>
