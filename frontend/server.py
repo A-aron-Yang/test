@@ -1,25 +1,22 @@
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import os
-import re
 
 class SPAHandler(SimpleHTTPRequestHandler):
-    def __init__(self, *args, **kwargs):
-        # Store the original path before it gets modified
-        super().__init__(*args, **kwargs)
-    
     def do_GET(self):
-        # If requesting known assets, serve them directly
-        if self.path.startswith('/assets/') or self.path == '/favicon.ico':
-            return SimpleHTTPRequestHandler.do_GET(self)
+        file_path = self.translate_path(self.path)
         
-        # For all other paths (including /product/1, /shop, etc.), serve index.html
-        self.path = '/index.html'
-        return SimpleHTTPRequestHandler.do_GET(self)
+        if os.path.exists(file_path) and os.path.isfile(file_path):
+            # if the file exists, serve it normally
+            return SimpleHTTPRequestHandler.do_GET(self)
+        else:
+            # for all other routes, serve index.html
+            self.path = '/index.html'
+            return SimpleHTTPRequestHandler.do_GET(self)
 
     def end_headers(self):
-        # Enable CORS
+        # enable CORS
         self.send_header('Access-Control-Allow-Origin', '*')
-        # Set correct content types
+        # set correct content types
         if self.path.endswith('.js'):
             self.send_header('Content-Type', 'application/javascript')
         elif self.path.endswith('.css'):
@@ -29,10 +26,9 @@ class SPAHandler(SimpleHTTPRequestHandler):
         return SimpleHTTPRequestHandler.end_headers(self)
 
 def run(port=8000):
-    # Change to the dist directory
+    # change to the dist directory
     os.chdir('dist')
     
-    # Create server
     server_address = ('', port)
     httpd = HTTPServer(server_address, SPAHandler)
     
