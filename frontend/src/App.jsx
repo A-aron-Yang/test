@@ -23,7 +23,7 @@ export default function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Navigate to="/shop" replace />} />
+        <Route path="/" element={<Navigate to="/home" replace />} />
         <Route
           path="/home"
           element={
