@@ -113,8 +113,7 @@ app.delete('/api/products/:id', (req, res) => {
   products = products.filter(p => p.id !== id)
   res.status(204).send()
 })
-/*
-prep for reviews and wishlist page 
+
 // Reviews endpoints
 app.get('/api/reviews/:productId', (req, res) => {
   const productId = parseInt(req.params.productId)
@@ -164,7 +163,6 @@ app.delete('/api/wishlist/:userId/remove/:productId', (req, res) => {
 
   res.json(wishlists[userId])
 })
-*/
 
 const PORT = process.env.PORT ?? 5000
 app.listen(PORT, () => {
