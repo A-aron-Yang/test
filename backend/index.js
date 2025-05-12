@@ -7,7 +7,7 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// In memory product store
+// in memory product store
 let products = [
   {
     id: 1,
@@ -19,8 +19,29 @@ let products = [
     price: 7.99,
     image: '/images/charcoal-detox.jpg',
     description: 'Deep cleansing soap with activated charcoal.'
+  },
+  {
+    id: 2,
+    name: 'Lavender Dreams',
+    category: 'Relaxing',
+    fragrance: 'Lavender',
+    skinType: 'All',
+    ingredients: ['Lavender Oil', 'Olive Oil', 'Coconut Oil'],
+    price: 6.99,
+    image: '/images/lavender-dreams.jpg',
+    description: 'Calming lavender soap for a relaxing experience.'
+  },
+  {
+    id: 3,
+    name: 'Citrus Burst',
+    category: 'Energizing',
+    fragrance: 'Orange & Lemon',
+    skinType: 'Normal',
+    ingredients: ['Orange Oil', 'Lemon Oil', 'Shea Butter'],
+    price: 5.99,
+    image: '/images/citrus-burst.jpg',
+    description: 'Refreshing citrus soap to energize your day.'
   }
-  // Add initial products or load from file/db as needed
 ]
 
 // Health check endpoint

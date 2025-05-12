@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
+const API_URL = 'http://localhost:5000/api'
+
 export default function Admin() {
   const [products, setProducts] = useState([])
   const [form, setForm] = useState({
@@ -16,9 +18,10 @@ export default function Admin() {
   const [editing, setEditing] = useState(false)
 
   useEffect(() => {
-    fetch('/api/products')
+    fetch(`${API_URL}/products`)
       .then(res => res.json())
       .then(setProducts)
+      .catch(error => console.error('Error fetching products:', error))
   }, [])
 
   const handleChange = e => {
@@ -29,7 +32,7 @@ export default function Admin() {
   const handleSubmit = e => {
     e.preventDefault()
     const method = editing ? 'PUT' : 'POST'
-    const url = editing ? `/api/products/${form.id}` : '/api/products'
+    const url = editing ? `${API_URL}/products/${form.id}` : `${API_URL}/products`
     const body = {
       ...form,
       ingredients: form.ingredients.split(',').map(i => i.trim()),
@@ -60,6 +63,7 @@ export default function Admin() {
         })
         setEditing(false)
       })
+      .catch(error => console.error('Error saving product:', error))
   }
 
   const handleEdit = product => {
@@ -71,9 +75,11 @@ export default function Admin() {
   }
 
   const handleDelete = id => {
-    fetch(`/api/products/${id}`, { method: 'DELETE' }).then(() => {
-      setProducts(products.filter(p => p.id !== id))
-    })
+    fetch(`${API_URL}/products/${id}`, { method: 'DELETE' })
+      .then(() => {
+        setProducts(products.filter(p => p.id !== id))
+      })
+      .catch(error => console.error('Error deleting product:', error))
   }
 
   return (
@@ -176,12 +182,12 @@ export default function Admin() {
         )}
       </form>
 
-      <h2 className="text-xl font-semibold mb-2">Existing Products</h2>
+      <h2 className="text-xl font-semibold mb-2 text-black">Existing Products</h2>
       <ul>
         {products.map(p => (
-          <li key={p.id} className="mb-2 border p-2 rounded flex justify-between items-center">
+          <li key={p.id} className="mb-2 border p-2 rounded flex justify-between items-center text-black">
             <div>
-              <strong>{p.name}</strong> - ${p.price.toFixed(2)}
+              <strong className="text-black">{p.name}</strong> - <span className="text-black">${p.price.toFixed(2)}</span>
             </div>
             <div>
               <button
