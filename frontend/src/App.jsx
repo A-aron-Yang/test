@@ -14,6 +14,8 @@ import Confirmation from './pages/Confirmation'
 import Shop from './pages/Shop'
 import Product from './pages/Product'
 import Admin from './pages/Admin'
+import Reviews from './pages/Reviews'
+import Wishlist from './pages/Wishlist'
 
 export default function App() {
   return (
@@ -42,6 +44,8 @@ export default function App() {
         <Route path="/shop" element={<Shop />} />
         <Route path="/product/:id" element={<Product />} />
         <Route path="/admin" element={<Admin />} />
+        <Route path="/reviews/:productId" element={<Reviews />} />
+        <Route path="/wishlist" element={<Wishlist />} />
       </Routes>
     </div>
   )

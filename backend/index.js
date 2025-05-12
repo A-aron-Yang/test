@@ -7,7 +7,9 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// In-memory product store
+// In-memory stores
+let reviews = []
+let wishlists = {}
 let products = [
   {
     id: 1,
@@ -110,6 +112,56 @@ app.delete('/api/products/:id', (req, res) => {
   const id = parseInt(req.params.id)
   products = products.filter(p => p.id !== id)
   res.status(204).send()
+})
+
+// Reviews endpoints
+app.get('/api/reviews/:productId', (req, res) => {
+  const productId = parseInt(req.params.productId)
+  const productReviews = reviews.filter(review => review.productId === productId)
+  res.json(productReviews)
+})
+
+app.post('/api/reviews', (req, res) => {
+  const newReview = {
+    id: Date.now(),
+    ...req.body,
+    createdAt: new Date().toISOString()
+  }
+  reviews.push(newReview)
+  res.status(201).json(newReview)
+})
+
+// Wishlist endpoints
+app.get('/api/wishlist/:userId', (req, res) => {
+  const userId = req.params.userId
+  const userWishlist = wishlists[userId] || []
+  res.json(userWishlist)
+})
+
+app.post('/api/wishlist/:userId/add', (req, res) => {
+  const userId = req.params.userId
+  const { productId } = req.body
+
+  if (!wishlists[userId]) {
+    wishlists[userId] = []
+  }
+
+  if (!wishlists[userId].includes(productId)) {
+    wishlists[userId].push(productId)
+  }
+
+  res.json(wishlists[userId])
+})
+
+app.delete('/api/wishlist/:userId/remove/:productId', (req, res) => {
+  const userId = req.params.userId
+  const productId = parseInt(req.params.productId)
+
+  if (wishlists[userId]) {
+    wishlists[userId] = wishlists[userId].filter(id => id !== productId)
+  }
+
+  res.json(wishlists[userId])
 })
 
 const PORT = process.env.PORT ?? 5000
