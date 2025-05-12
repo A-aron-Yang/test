@@ -7,40 +7,73 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-// in memory product store
+// In-memory product store
 let products = [
   {
     id: 1,
-    name: 'Charcoal Detox',
-    category: 'Purifying',
-    fragrance: 'Unscented',
-    skinType: 'Oily',
-    ingredients: ['Activated Charcoal', 'Coconut Oil', 'Shea Butter'],
-    price: 7.99,
-    image: '/images/charcoal-detox.jpg',
-    description: 'Deep cleansing soap with activated charcoal.'
+    name: 'Lavender Bliss',
+    price: 8.99,
+    description: 'A soothing blend of pure lavender essential oil to calm your senses and soften skin.',
+    category: 'Relaxing',
+    fragrance: 'Lavender',
+    ingredients: ['Natural Oils', 'Herbal Extracts', 'Lavender Essential Oil'],
+    skinType: 'Sensitive',
+    image: 'https://images.pexels.com/photos/4041392/pexels-photo-4041392.jpeg'
   },
   {
     id: 2,
-    name: 'Lavender Dreams',
-    category: 'Relaxing',
-    fragrance: 'Lavender',
-    skinType: 'All',
-    ingredients: ['Lavender Oil', 'Olive Oil', 'Coconut Oil'],
-    price: 6.99,
-    image: '/images/lavender-dreams.jpg',
-    description: 'Calming lavender soap for a relaxing experience.'
+    name: 'Rose Petal Magic',
+    price: 9.49,
+    description: 'Infused with real rose petals for a luxurious, fragrant experience that pampers your skin.',
+    category: 'Romantic',
+    fragrance: 'Rose',
+    ingredients: ['Organic Rose Petals', 'Essential Oils', 'Shea Butter'],
+    skinType: 'Normal',
+    image: 'https://images.pexels.com/photos/3997993/pexels-photo-3997993.jpeg'
   },
   {
     id: 3,
-    name: 'Citrus Burst',
+    name: 'Citrus Sunrise',
+    price: 7.99,
+    description: 'A burst of citrus aroma, perfect for an energizing morning routine.',
     category: 'Energizing',
-    fragrance: 'Orange & Lemon',
+    fragrance: 'Citrus',
+    ingredients: ['Citrus Extracts', 'Natural Oils', 'Orange Peel'],
+    skinType: 'Oily',
+    image: 'https://images.pexels.com/photos/6621462/pexels-photo-6621462.jpeg'
+  },
+  {
+    id: 4,
+    name: 'Minty Fresh',
+    price: 8.49,
+    description: 'Cool and invigorating peppermint soap for a refreshing clean feeling.',
+    category: 'Refreshing',
+    fragrance: 'Mint',
+    ingredients: ['Peppermint Oil', 'Coconut Oil', 'Aloe Vera'],
     skinType: 'Normal',
-    ingredients: ['Orange Oil', 'Lemon Oil', 'Shea Butter'],
-    price: 5.99,
-    image: '/images/citrus-burst.jpg',
-    description: 'Refreshing citrus soap to energize your day.'
+    image: 'https://images.pexels.com/photos/6621323/pexels-photo-6621323.jpeg'
+  },
+  {
+    id: 5,
+    name: 'Oatmeal Comfort',
+    price: 7.49,
+    description: 'Gentle oatmeal soap that soothes and nourishes sensitive skin.',
+    category: 'Sensitive',
+    fragrance: 'Unscented',
+    ingredients: ['Colloidal Oatmeal', 'Honey', 'Goat Milk'],
+    skinType: 'Sensitive',
+    image: 'https://images.pexels.com/photos/6621264/pexels-photo-6621264.jpeg'
+  },
+  {
+    id: 6,
+    name: 'Charcoal Detox',
+    price: 9.99,
+    description: 'Deep cleansing activated charcoal soap for purified, refreshed skin.',
+    category: 'Purifying',
+    fragrance: 'Tea Tree',
+    ingredients: ['Activated Charcoal', 'Tea Tree Oil', 'Eucalyptus'],
+    skinType: 'Oily',
+    image: 'https://images.pexels.com/photos/6621552/pexels-photo-6621552.jpeg'
   }
 ]
 
