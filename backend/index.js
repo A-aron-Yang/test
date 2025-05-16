@@ -7,6 +7,11 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
+//
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:8000',
+}))
+
 // In-memory stores
 let reviews = []
 let wishlists = {}

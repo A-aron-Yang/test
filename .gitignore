@@ -1,0 +1,6 @@
+#Intellij IDEA/ webStorm/ PhpStorm
+.idea/
+*.iml
+*.iws
+
+out/
